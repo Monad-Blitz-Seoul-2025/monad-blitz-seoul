@@ -195,9 +195,14 @@ const ProfilePage = ({ me, match_requests }: SchedulePageProps) => {
                   <p>📅 {req.preferred_date}</p>
                   <p>🕒 {req.time_slot}</p>
                   <p>📍 {req.region}</p>
+                  {req.highest_bid_amount && req.highest_bid_currency && (
+                    <p className="mt-2 text-yellow-300 font-semibold">
+                      💰 {req.highest_bid_amount} {req.highest_bid_currency}
+                    </p>
+                  )}
                   {req.message && (
                     <p className="mt-2 text-pink-300 italic">
-                      💬 “{req.message}”
+                      💬 "{req.message}"
                     </p>
                   )}
                 </div>

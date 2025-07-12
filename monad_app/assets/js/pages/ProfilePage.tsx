@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { ethers } from "ethers";
 interface MatchRequest {
     id: string;
     from_user_id: string;
@@ -58,8 +59,10 @@ interface SchedulePageProps {
 }
 
 const ProfilePage = ({ me, match_requests }: SchedulePageProps) => {
-
     const [showModal, setShowModal] = useState(false);
+    const [walletAddress, setWalletAddress] = useState<string>("");
+    const [balance, setBalance] = useState<string>("");
+    const [isConnected, setIsConnected] = useState(false);
     const [form, setForm] = useState({
         date: "",
         time: "",
@@ -73,6 +76,32 @@ const ProfilePage = ({ me, match_requests }: SchedulePageProps) => {
     ) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
+
+    const connectWallet = async () => {
+        if (typeof window.ethereum !== 'undefined') {
+            try {
+                const provider = new ethers.BrowserProvider(window.ethereum);
+                await provider.send("eth_requestAccounts", []);
+                const signer = await provider.getSigner();
+                const address = await signer.getAddress();
+                const balance = await provider.getBalance(address);
+                
+                setWalletAddress(address);
+                setBalance(ethers.formatEther(balance));
+                setIsConnected(true);
+            } catch (error) {
+                console.error("Failed to connect wallet:", error);
+            }
+        } else {
+            alert("Please install MetaMask!");
+        }
+    };
+
+    useEffect(() => {
+        if (typeof window.ethereum !== 'undefined') {
+            connectWallet();
+        }
+    }, []);
 
     const handleCreateSchedule = async () => {
         const payload = {
@@ -101,7 +130,19 @@ const ProfilePage = ({ me, match_requests }: SchedulePageProps) => {
                 />
                 <h2 className="text-xl font-bold">{me.nickname}</h2>
                 <p className="text-pink-300 italic mt-1">{me.profile.one_line_intro}</p>
-                <p className="text-purple-300 mt-2">{me.wallet_address || "Not linked"}</p>
+                <div className="text-purple-300 mt-2">
+                    <p><strong>DB Address:</strong> {me.wallet_address || "Not linked"}</p>
+                    <p><strong>MetaMask:</strong> {isConnected ? walletAddress : "Not connected"}</p>
+                    <p><strong>Balance:</strong> {isConnected ? `${parseFloat(balance).toFixed(4)} ETH` : "--"}</p>
+                    {!isConnected && (
+                        <button 
+                            onClick={connectWallet}
+                            className="mt-2 px-3 py-1 bg-blue-500 rounded hover:bg-blue-600 transition text-sm"
+                        >
+                            Connect MetaMask
+                        </button>
+                    )}
+                </div>
             </div>
 
             {/* ✅ Match Requests Section */}

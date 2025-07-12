@@ -1,4 +1,16 @@
 import React, { useState } from "react";
+interface MatchRequest {
+    id: string;
+    from_user_id: string;
+    to_user_id: string;
+    sender_name: string;
+    sender_nickname: string;
+    sender_profile_picture: string;
+    preferred_date: string;
+    time_slot: string;
+    region: string;
+    message?: string;
+}
 
 interface Profile {
     user_id: string;
@@ -42,9 +54,11 @@ interface Me {
 
 interface SchedulePageProps {
     me: Me;
+    match_requests: MatchRequest[];
 }
 
-const SchedulePage = ({ me }: SchedulePageProps) => {
+const SchedulePage = ({ me, match_requests }: SchedulePageProps) => {
+
     const [showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({
         date: "",
@@ -70,6 +84,7 @@ const SchedulePage = ({ me }: SchedulePageProps) => {
             amount: parseFloat(form.amount),
         };
 
+        console.log(me);
         console.log("POST /api/schedule", payload);
 
         setShowModal(false);
@@ -87,6 +102,61 @@ const SchedulePage = ({ me }: SchedulePageProps) => {
                 <h2 className="text-xl font-bold">{me.nickname}</h2>
                 <p className="text-pink-300 italic mt-1">{me.profile.one_line_intro}</p>
                 <p className="text-purple-300 mt-2">{me.wallet_address || "Not linked"}</p>
+            </div>
+
+            {/* ✅ Match Requests Section */}
+            <div className="mb-10">
+                <h2 className="text-2xl font-bold mb-4">📝 Match Requests</h2>
+                {match_requests.length > 0 ? (
+                    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                        {match_requests.map((req) => (
+                            <div
+                                key={req.id}
+                                className="bg-white/10 border border-white/20 rounded-2xl p-5 flex flex-col justify-between backdrop-blur-md hover:bg-white/15 transition"
+                            >
+                                <div className="flex items-center gap-4 mb-3">
+                                    <img
+                                        src={req.sender_profile_picture}
+                                        alt={req.sender_name}
+                                        className="w-14 h-14 rounded-full border-2 border-pink-400 shadow-md"
+                                    />
+                                    <div>
+                                        <h3 className="text-lg font-semibold text-pink-200">
+                                            {req.sender_nickname}
+                                        </h3>
+                                        <p className="text-sm text-purple-300">{req.sender_name}</p>
+                                    </div>
+                                </div>
+                                <div className="text-sm text-purple-100 mb-3">
+                                    <p>📅 {req.preferred_date}</p>
+                                    <p>🕒 {req.time_slot}</p>
+                                    <p>📍 {req.region}</p>
+                                    {req.message && (
+                                        <p className="mt-2 text-pink-300 italic">
+                                            💬 “{req.message}”
+                                        </p>
+                                    )}
+                                </div>
+                                <div className="flex justify-end gap-2 mt-auto">
+                                    <button
+                                        onClick={() => handleMatchAction(req.id, true)}
+                                        className="px-4 py-1 bg-green-500/80 rounded hover:bg-green-600 transition text-white text-sm"
+                                    >
+                                        Accept
+                                    </button>
+                                    <button
+                                        onClick={() => handleMatchAction(req.id, false)}
+                                        className="px-4 py-1 bg-red-500/80 rounded hover:bg-red-600 transition text-white text-sm"
+                                    >
+                                        Deny
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p className="text-pink-300">No match requests.</p>
+                )}
             </div>
 
             {/* Schedule Section */}
@@ -139,8 +209,8 @@ const SchedulePage = ({ me }: SchedulePageProps) => {
                                     key={i}
                                     className="bg-pink-400/40 text-pink-100 px-3 py-1 rounded-full text-sm whitespace-nowrap"
                                 >
-                  {hobby}
-                </span>
+                              {hobby}
+                            </span>
                             ))}
                         </div>
                     ) : (

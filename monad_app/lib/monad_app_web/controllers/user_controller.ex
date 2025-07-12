@@ -47,9 +47,58 @@ defmodule MonadAppWeb.UserController do
       ]
     }
 
+    match_requests = [
+      %{
+        id: "req-001",
+        from_user_id: "user-999",
+        to_user_id: "user-1234",
+        status: "requested",
+        requested_at: ~N[2025-07-10 14:00:00],
+        responded_at: nil,
+        sender_name: "Alice Kim",
+        sender_nickname: "alicek",
+        sender_profile_picture: "https://source.unsplash.com/random/100x100?woman,face,1",
+        preferred_date: "2025-07-14",
+        time_slot: "18:00-19:30",
+        region: "Seoul",
+        message: "Let's spar before the next league!"
+      },
+      %{
+        id: "req-002",
+        from_user_id: "user-888",
+        to_user_id: "user-1234",
+        status: "requested",
+        requested_at: ~N[2025-07-11 09:30:00],
+        responded_at: nil,
+        sender_name: "Bob Lee",
+        sender_nickname: "boblee",
+        sender_profile_picture: "https://source.unsplash.com/random/100x100?man,face,2",
+        preferred_date: "2025-07-16",
+        time_slot: "21:00-22:00",
+        region: "Busan",
+        message: nil
+      },
+      %{
+        id: "req-003",
+        from_user_id: "user-777",
+        to_user_id: "user-1234",
+        status: "requested",
+        requested_at: ~N[2025-07-12 17:45:00],
+        responded_at: nil,
+        sender_name: "Sara Yoon",
+        sender_nickname: "saray",
+        sender_profile_picture: "https://source.unsplash.com/random/100x100?woman,face,3",
+        preferred_date: "2025-07-18",
+        time_slot: "20:00-21:30",
+        region: "Gangnam",
+        message: "Hope we can match this week 🙌"
+      }
+    ]
+
     conn
     |> assign(:page_title, "예약")
     |> assign_prop(:me, me)
+    |> assign_prop(:match_requests, match_requests)
     |> render_inertia("SchedulePage")
   end
 end

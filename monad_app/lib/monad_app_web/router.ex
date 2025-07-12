@@ -40,6 +40,7 @@ defmodule MonadAppWeb.Router do
     pipe_through [:browser, :authenticated]
 
     get "/users/profile", UserController, :profile
+    get "/feed", FeedController, :index
   end
 
   scope "/", MonadAppWeb do

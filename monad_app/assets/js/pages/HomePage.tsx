@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "@inertiajs/react";
 
 interface Feature {
   icon: string;
@@ -54,13 +55,12 @@ const HomePage = (props: PageProps) => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <button className="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200">
+            <Link
+              href="/feed"
+              className="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
+            >
               {props.cta_primary}
-            </button>
-
-            <button className="px-8 py-3 border border-white/30 text-white font-medium rounded-lg hover:bg-white/10 transition-all duration-200">
-              {props.cta_secondary}
-            </button>
+            </Link>
           </div>
 
           {/* Feature cards */}

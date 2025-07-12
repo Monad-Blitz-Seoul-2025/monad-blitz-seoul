@@ -4,37 +4,33 @@ defmodule MonadAppWeb.PageController do
   def home(conn, _params) do
     features = [
       %{
-        icon: "💎",
-        title: "자산 인증",
-        description: "신뢰할 수 있는 자산 정보를 통한 안전한 매칭"
+        title: "식사 경매",
+        description: "원하는 인연과 함께하는 특별한 식사 경험을 경매로"
       },
       %{
-        icon: "💕",
-        title: "전문 매칭",
-        description: "경제적 안정성과 가치관을 고려한 맞춤 매칭"
+        title: "인연 매칭",
+        description: "취향에 맞는 완벽한 인연 매칭 서비스"
       },
       %{
-        icon: "🌟",
-        title: "프리미엄 서비스",
-        description: "품격 있는 만남을 위한 차별화된 서비스"
+        title: "자산 수준에 맞는 인연 매칭",
+        description: "자산 수준에 맞는 인연 매칭 서비스"
       }
     ]
 
     conn
     |> assign(:page_title, "런치 옥션")
     |> assign_prop(:features, features)
-    |> assign_prop(:hero_title, "진정한 사랑을 위한")
-    |> assign_prop(:hero_highlight, "자산 매칭")
+    |> assign_prop(:hero_title, "특별한 만남을 위한")
+    |> assign_prop(:hero_highlight, "식사 경매 매칭")
     |> assign_prop(
       :subtitle,
-      "경제적 안정성을 바탕으로 한 진실한 만남의 시작."
+      "원하는 사람과 함께하는 맞춤형 식사 경험의 시작."
     )
     |> assign_prop(
       :subtitle_highlight,
-      "품격 있는 파트너와 함께 미래를 설계하세요."
+      "최고의 인연과 함께 특별한 시간을 가져보세요"
     )
-    |> assign_prop(:cta_primary, "매칭 시작하기")
-    |> assign_prop(:cta_secondary, "서비스 알아보기")
+    |> assign_prop(:cta_primary, "경매 참여하기")
     |> render_inertia("HomePage")
   end
 end

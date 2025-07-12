@@ -37,29 +37,13 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="bg-white px-8 py-6">
+    <header className="bg-gray-50 px-8 py-6">
       <div className="max-w-full flex justify-between items-center relative">
         <div className="flex items-center space-x-2">
           <Link href="/" className="text-4xl font-bold text-gray-900 font-gugi">
             런치 옥션
           </Link>
         </div>
-
-        <nav className="absolute left-1/2 transform -translate-x-1/2 flex space-x-12">
-          <Link
-            href="/feed"
-            className="text-gray-900 font-medium hover:text-blue-600 transition-colors"
-          >
-            피드조회
-          </Link>
-          <Link
-            href="/success-stories"
-            className="text-gray-900 font-medium hover:text-blue-600 transition-colors"
-          >
-            성공 스토리
-          </Link>
-        </nav>
-
         <div className="flex items-center space-x-4">
           {user ? (
             <div className="relative" ref={dropdownRef}>
@@ -88,12 +72,6 @@ const Header = () => {
                     className="w-full flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
                   >
                     <span>프로필 조회</span>
-                  </Link>
-                  <Link
-                    href="/users/profile"
-                    className="w-full flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
-                  >
-                    <span>지갑 조회</span>
                   </Link>
                   <button
                     onClick={handleLogout}

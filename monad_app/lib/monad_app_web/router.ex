@@ -34,8 +34,12 @@ defmodule MonadAppWeb.Router do
     pipe_through [:browser, :auth_optional]
 
     get "/", PageController, :home
+  end
 
-    get "/schedule", ScheduleController, :render
+  scope "/", MonadAppWeb do
+    pipe_through [:browser, :authenticated]
+
+    get "/users/profile", UserController, :profile
   end
 
   scope "/", MonadAppWeb do

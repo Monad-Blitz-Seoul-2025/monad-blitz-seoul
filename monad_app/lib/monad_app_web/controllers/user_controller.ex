@@ -1,0 +1,55 @@
+defmodule MonadAppWeb.UserController do
+  use MonadAppWeb, :controller
+
+  def profile(conn, _params) do
+    me = %{
+      id: "user-1234",
+      name: "James Carter",
+      nickname: "jcarter",
+      email: "james.carter@moname.com",
+      password: "supersecret",
+      wallet_address: "0x1234567890abcdef1234567890abcdef12345678",
+      phone_number: "+1-555-1234",
+      gender: "male",
+      profile_picture: "https://avatars.githubusercontent.com/u/96886982?v=4",
+      introduction: "Hi, I’m James. I love decentralized tech and good food.",
+      league: "platinum",
+      staked_amount: 150.0,
+      sns_links: %{
+        instagram: "https://instagram.com/jcarter",
+        twitter: "https://twitter.com/jcarter_eth"
+      },
+      schedule_visibility: "league",
+      created_at: ~N[2025-07-01 10:00:00],
+      updated_at: ~N[2025-07-10 18:45:00],
+      profile: %{
+        user_id: "user-1234",
+        hobbies: ["Cooking", "Hiking", "Chess"],
+        interests: ["Blockchain", "Philosophy", "AI"],
+        one_line_intro: "Dreamer. Builder. Degen.",
+        portfolio_url: "https://jcarter.dev"
+      },
+      schedules: [
+        %{
+          id: "sched-001",
+          user_id: "user-1234",
+          date: ~D[2025-07-13],
+          time_slot: "19:00-21:00",
+          region: "Seoul"
+        },
+        %{
+          id: "sched-002",
+          user_id: "user-1234",
+          date: ~D[2025-07-15],
+          time_slot: "20:30-22:00",
+          region: "Gangnam"
+        }
+      ]
+    }
+
+    conn
+    |> assign(:page_title, "예약")
+    |> assign_prop(:me, me)
+    |> render_inertia("SchedulePage")
+  end
+end

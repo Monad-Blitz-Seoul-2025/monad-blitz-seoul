@@ -1,15 +1,40 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, usePage, useForm } from "@inertiajs/react";
-import { Plane, LogIn, UserPlus, LogOut } from "lucide-react";
+import {
+  Plane,
+  LogIn,
+  UserPlus,
+  LogOut,
+  ChevronDown,
+  User,
+} from "lucide-react";
 
 const Header = () => {
   const { props } = usePage();
   const user = props.user;
   const { delete: destroy } = useForm();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = () => {
-    destroy("users/log_out");
+    destroy("/users/log_out");
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className="bg-white px-8 py-6">
@@ -43,15 +68,42 @@ const Header = () => {
 
         <div className="flex items-center space-x-4">
           {user ? (
-            <div className="flex items-center space-x-4">
-              <span className="text-gray-700">안녕하세요, {user.email}님</span>
+            <div className="relative" ref={dropdownRef}>
               <button
-                onClick={handleLogout}
-                className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-red-600 transition-colors"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
               >
-                <LogOut size={16} />
-                <span>로그아웃</span>
+                <User size={20} />
+                <span>{user.nick_name}님</span>
+                <ChevronDown
+                  size={16}
+                  className={`transform transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
+                />
               </button>
+
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                  <div className="px-4 py-2 border-b border-gray-200">
+                    <p className="text-sm text-gray-600">안녕하세요,</p>
+                    <p className="font-medium text-gray-900">
+                      {user.nick_name}님
+                    </p>
+                  </div>
+                  <Link
+                    href="/users/profile"
+                    className="w-full flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                  >
+                    <span>프로필 조회</span>
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                  >
+                    <LogOut size={16} />
+                    <span>로그아웃</span>
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <>

@@ -57,7 +57,7 @@ interface SchedulePageProps {
     match_requests: MatchRequest[];
 }
 
-const SchedulePage = ({ me, match_requests }: SchedulePageProps) => {
+const ProfilePage = ({ me, match_requests }: SchedulePageProps) => {
 
     const [showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({
@@ -317,4 +317,4 @@ const SchedulePage = ({ me, match_requests }: SchedulePageProps) => {
     );
 };
 
-export default SchedulePage;
+export default ProfilePage;

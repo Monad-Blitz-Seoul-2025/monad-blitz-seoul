@@ -99,6 +99,6 @@ defmodule MonadAppWeb.UserController do
     |> assign(:page_title, "예약")
     |> assign_prop(:me, me)
     |> assign_prop(:match_requests, match_requests)
-    |> render_inertia("SchedulePage")
+    |> render_inertia("ProfilePage")
   end
 end

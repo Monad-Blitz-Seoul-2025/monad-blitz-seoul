@@ -19,6 +19,8 @@ defmodule MonadAppWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    get "/schedule", ScheduleController, :render
   end
 
   # Other scopes may use custom stacks.

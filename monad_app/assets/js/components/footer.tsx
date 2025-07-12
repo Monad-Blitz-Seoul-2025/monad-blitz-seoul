@@ -9,12 +9,12 @@ const Footer = () => {
           {/* 브랜드 정보 */}
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <h5 className="text-4xl font-bold font-gugi">모나드 매치</h5>
+              <h5 className="text-4xl font-bold font-gugi">런치 옥션</h5>
             </div>
             <p className="text-gray-400 mb-8 leading-relaxed text-sm">
-              자산을 기반으로 한 진정한 매칭 서비스입니다. 경제적 안정성과 
-              가치관이 맞는 이상적인 파트너를 찾아드립니다. 품격 있는 
-              만남을 시작하세요.
+              자산을 기반으로 한 진정한 매칭 서비스입니다. 경제적 안정성과
+              가치관이 맞는 이상적인 파트너를 찾아드립니다. 품격 있는 만남을
+              시작하세요.
             </p>
             <div className="flex space-x-6">
               <Instagram className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
@@ -128,7 +128,7 @@ const Footer = () => {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © 2025 모나드 매치. All rights reserved.
+              © 2025 런치 옥션. All rights reserved.
             </p>
             <div className="flex space-x-8 text-sm text-gray-400">
               <a href="#" className="hover:text-white transition-colors">

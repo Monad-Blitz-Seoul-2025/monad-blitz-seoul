@@ -41,7 +41,7 @@ const Header = () => {
       <div className="max-w-full flex justify-between items-center relative">
         <div className="flex items-center space-x-2">
           <Link href="/" className="text-4xl font-bold text-gray-900 font-gugi">
-            모나드 매치
+            런치 옥션
           </Link>
         </div>
 
@@ -51,12 +51,6 @@ const Header = () => {
             className="text-gray-900 font-medium hover:text-blue-600 transition-colors"
           >
             피드조회
-          </Link>
-          <Link
-            href="/premium"
-            className="text-gray-900 font-medium hover:text-blue-600 transition-colors"
-          >
-            프리미엄 회원
           </Link>
           <Link
             href="/success-stories"

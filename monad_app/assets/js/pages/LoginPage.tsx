@@ -28,7 +28,7 @@ const LoginPage = (props: LoginProps) => {
               <LogIn className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-2">로그인</h1>
-            <p className="text-gray-600">모나드 매치에 오신 것을 환영합니다</p>
+            <p className="text-gray-600">런치 옥션에 오신 것을 환영합니다</p>
           </div>
 
           {/* Login Form */}

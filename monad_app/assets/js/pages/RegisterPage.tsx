@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { useForm, Link } from "@inertiajs/react";
-import { UserPlus, Eye, EyeOff, Mail, Lock, User, Phone, Wallet } from "lucide-react";
+import {
+  UserPlus,
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  User,
+  Phone,
+  Wallet,
+} from "lucide-react";
 
 interface RegisterProps {}
 
@@ -33,7 +42,7 @@ const RegisterPage = (props: RegisterProps) => {
               <UserPlus className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-2">회원가입</h1>
-            <p className="text-gray-600">모나드 매치에 가입하세요</p>
+            <p className="text-gray-600">런치 옥션에 가입하세요</p>
           </div>
 
           {/* Register Form */}
@@ -126,7 +135,9 @@ const RegisterPage = (props: RegisterProps) => {
                   id="crypto_wallet_address"
                   type="text"
                   value={data.crypto_wallet_address}
-                  onChange={(e) => setData("crypto_wallet_address", e.target.value)}
+                  onChange={(e) =>
+                    setData("crypto_wallet_address", e.target.value)
+                  }
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                   placeholder="지갑 주소를 입력하세요"
                   required

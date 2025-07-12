@@ -61,7 +61,9 @@ defmodule MonadAppWeb.UserController do
         preferred_date: "2025-07-14",
         time_slot: "18:00-19:30",
         region: "Seoul",
-        message: "Let's spar before the next league!"
+        message: "Let's spar before the next league!",
+        highest_bid_amount: 2.5,
+        highest_bid_currency: "ETH"
       },
       %{
         id: "req-002",
@@ -76,7 +78,9 @@ defmodule MonadAppWeb.UserController do
         preferred_date: "2025-07-16",
         time_slot: "21:00-22:00",
         region: "Busan",
-        message: nil
+        message: nil,
+        highest_bid_amount: 1.8,
+        highest_bid_currency: "ETH"
       },
       %{
         id: "req-003",
@@ -91,7 +95,9 @@ defmodule MonadAppWeb.UserController do
         preferred_date: "2025-07-18",
         time_slot: "20:00-21:30",
         region: "Gangnam",
-        message: "Hope we can match this week 🙌"
+        message: "Hope we can match this week 🙌",
+        highest_bid_amount: 3.2,
+        highest_bid_currency: "ETH"
       }
     ]
 
